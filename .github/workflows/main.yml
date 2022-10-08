@@ -38,8 +38,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Push docker images
-      uses: docker/build-push-action@v3
-      with:
-        context: .
-        push: true
-        tags: user/app:latest
+      run: |
+        docker tag gitops akash300/gitops
+        docker push akash300/gitops
