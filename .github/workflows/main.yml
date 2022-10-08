@@ -39,5 +39,5 @@ jobs:
     steps:
     - name: Push docker images
       run: |
-        docker tag gitops akash300/gitops
+        docker tag akash300/gitops
         docker push akash300/gitops
