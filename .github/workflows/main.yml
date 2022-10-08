@@ -21,7 +21,7 @@ jobs:
 
   
       -  name: build docker images
-         run: docker build -t pramod003/app-trial .
+         run: docker build -t akash300/app-trial .
 
   login:
     needs: build
