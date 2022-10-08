@@ -21,7 +21,7 @@ jobs:
 
   
       -  name: build docker images
-         run: docker build -t akash300/app-trial .
+         run: docker build -t trailimage .
 
   login:
     needs: build
@@ -39,5 +39,5 @@ jobs:
     steps:
     - name: Push docker images
       run: |
-        docker tag akash300/gitops
-        docker push akash300/gitops
+        docker tag trailimage akash300/trailimage
+        docker push akash300/trailimage
