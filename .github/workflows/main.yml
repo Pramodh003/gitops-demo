@@ -1,0 +1,45 @@
+
+name: CI
+
+on:
+  
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+  
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+  
+      -  name: build docker images
+         run: docker build -t pramod003/app-trial
+
+  login:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+     - name: Login to dockerhub
+       uses: actions/login-action@v2
+       with:
+         username: ${{ secrets.DOCKERHUB_USERNAME }}
+         password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  push:
+    needs: login  
+    runs-on: ubuntu-latest
+    steps:
+    - name: Push docker images
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        push: true
+        tags: user/app:latest
